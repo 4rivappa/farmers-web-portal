@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import axios from 'axios'
 
 import './Dashboard.css';
 
@@ -37,10 +38,17 @@ const Dashboard = () => {
   const updateProfilePicFormHandler = async (e) => {
     e.preventDefault()
     let formData = new FormData();
-    formData.append('image', image)
+    console.log("update profile pic form handler --- function")
+    console.log(image)
+    formData.append("image", image)
+    // console.log(formData["image"])
+    for (var key of formData.entries()) {
+      console.log(key[0] + ', ' + key[1]);
+    }
 
     try {
-      await axios.post("http://localhost:9999/uploadprofilepic", formData, {
+      const email = localStorage.getItem('email')
+      await axios.post("http://localhost:9999/uploadprofilepic/" + email, formData, {
         headers: {
           "Content-type": "multipart/form-data",
         }

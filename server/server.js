@@ -39,8 +39,6 @@ mongoose.connect(dbURI)
         }))
         .catch((err)=> console.log(err))
 
-
-
 // routes
 
 app.use(authRoutes)
